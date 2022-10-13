@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'PowerModeApp';
+  overlayShowing: boolean = false;
 
   @HostListener('document:keypress', ['$event'])
   navigate(event: KeyboardEvent) {
@@ -20,6 +21,11 @@ export class AppComponent {
       }
       case '2': {
         this.router.navigateByUrl('/salesflows');
+        break;
+      }
+      case '`': {
+        // This toggles the legend overlay
+        this.overlayShowing = !this.overlayShowing;
         break;
       }
       default:
