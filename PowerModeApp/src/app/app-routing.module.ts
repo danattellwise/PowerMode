@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {ContactsPageComponent} from "./contacts-page/contacts-page.component";
 import {SalesflowPageComponent} from "./salesflow-page/salesflow-page.component";
 import {LoginPageComponent} from "./login-page/login-page.component";
+import { SalesflowService } from './services/salesflow.service';
 
 const routes: Routes = [
   { path: 'contacts', component: ContactsPageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[SalesflowService]
 })
 export class AppRoutingModule { }
