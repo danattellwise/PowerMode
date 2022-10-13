@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table id="foobar" class="table table-hover">
     <thead>
       <tr>
         <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody *ngFor="let contact of contacts; let i = index">
-      <tr>
+      <tr id="{{'cr' + i}}">
         <td><input type="checkbox" value="{{contact.Id}}" [(ngModel)]="contacts[i].checked"></td>
         <td>{{ i+1 }}</td>
         <td>{{ contact.Name }}</td>
