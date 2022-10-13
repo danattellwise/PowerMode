@@ -1,1 +1,23 @@
 <p>salesflow-page works!</p>
+<table class="table">
+  <thead>
+  <tr>
+    <th><input type="checkbox" [checked]="isCheckboxChecked()" (change)="checkAllCheckBox($event)"></th>
+    <th>Salesflow Id</th>
+    <th>Salesflow Name</th>
+    <th>Owner Id</th>
+    <th>Total Steps</th>
+    <th>Created At</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let salesflow of salesflows; let i=index;">
+    <td><input type="checkbox" [checked]="salesflow.checked" (change)="toggleCheckbox(salesflow)"></td>
+    <td>{{salesflow.Id}}</td>
+    <td>{{salesflow.Title}}</td>
+    <td>{{salesflow.OwnerId}}</td>
+    <td>{{salesflow.StepCount}}</td>
+    <td>{{salesflow.CreatedAt}}</td>
+  </tr>
+  </tbody>
+</table>

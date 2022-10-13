@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { SalesflowPageComponent } from './salesflow-page/salesflow-page.component';
 import {ContactService} from "./Service/contact.service";
+import {SalesflowService} from "./services/salesflow.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import {ContactService} from "./Service/contact.service";
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [ContactService],
+  providers: [ContactService, SalesflowService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

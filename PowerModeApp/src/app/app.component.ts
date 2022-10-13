@@ -7,11 +7,10 @@ import { Router } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
-}) 
- 
+})
+
 export class AppComponent {
-  constructor(private router: Router, private SalesflowService:SalesflowService) { 
-    this.getSalesflowData();
+  constructor(private router: Router) {
   }
 
   title = 'PowerModeApp';
@@ -38,12 +37,6 @@ export class AppComponent {
       default:
         return;
     }
-  }
-
-  getSalesflowData() {
-    this.SalesflowService.getSalesflowData().subscribe((res:SalesFlow[]) => {
-      console.log(res)
-    })
   }
 
   // @HostListener('document:keydown.2')
