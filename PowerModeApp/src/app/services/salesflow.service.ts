@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http' 
+import { Injectable } from '@angular/core'; 
 import { Observable, of } from 'rxjs'
 import {data}  from '../../assets/salesflowData'
 
@@ -8,7 +7,7 @@ import {data}  from '../../assets/salesflowData'
 })
 export class SalesflowService {
  
-  constructor(private http:HttpClient) { }
+  constructor() { }
 
   getSalesflowData(): Observable<any>{
     return of(data);
