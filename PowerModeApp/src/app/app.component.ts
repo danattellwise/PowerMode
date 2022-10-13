@@ -1,12 +1,19 @@
 import { Component, HostListener } from '@angular/core';
+import { SalesFlow } from './contracts/salesflow';
+import { SalesflowService } from './services/salesflow.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
-})
+}) 
+ 
 export class AppComponent {
+  constructor(private router: Router, private SalesflowService:SalesflowService) { 
+    this.getSalesflowData();
+  }
+
   title = 'PowerModeApp';
   overlayShowing: boolean = false;
 
@@ -33,8 +40,10 @@ export class AppComponent {
     }
   }
 
-  constructor(private router: Router) {
-
+  getSalesflowData() {
+    this.SalesflowService.getSalesflowData().subscribe((res:SalesFlow[]) => {
+      console.log(res)
+    })
   }
 
   // @HostListener('document:keydown.2')
