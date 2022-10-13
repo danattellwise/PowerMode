@@ -41,26 +41,47 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
   }
 
   @HostListener('document:keydown', ['$event'])
-  changeHighlight(event: KeyboardEvent) {
-    //key: 'ArrowDown'
-    this.removeHighlightClass(this.currentIndex);
+  keyEvent(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'a':
+        if (event.ctrlKey == true) {
+          const allAreSelected = this.contacts.every(c => c.checked == true);
 
-    if (event.key == 'ArrowDown') {
-      if (this.currentIndex >= this.contacts.length - 1) {
-        this.currentIndex = 0;
-      } else {
-        this.currentIndex++;
-      }
-    } else if (event.key == 'ArrowUp'){
-      if (this.currentIndex <= 0) {
-        this.currentIndex = this.contacts.length - 1;
-      } else {
-        this.currentIndex--;
-      }
+          if (allAreSelected) {
+            this.contacts.forEach(c => c.checked = false);
+          } else {
+            this.contacts.forEach(c => c.checked = true);
+          }
+        }
+        break;
+
+      case 'ArrowDown':
+        this.removeHighlightClass(this.currentIndex);
+        if (this.currentIndex >= this.contacts.length - 1) {
+          this.currentIndex = 0;
+        } else {
+          this.currentIndex++;
+        }
+        this.addHighlightClass(this.currentIndex);
+        break;
+
+      case 'ArrowUp':
+        this.removeHighlightClass(this.currentIndex);
+        if (this.currentIndex <= 0) {
+          this.currentIndex = this.contacts.length - 1;
+        } else {
+          this.currentIndex--;
+        }
+        this.addHighlightClass(this.currentIndex);
+        break;
+
+      case ' ':
+        this.contacts[this.currentIndex].checked = !this.contacts[this.currentIndex].checked;
+        break;
+
+      default:
+        break;
     }
-
-    console.log('current index------', this.currentIndex);
-
-    this.addHighlightClass(this.currentIndex);
   }
+
 }
