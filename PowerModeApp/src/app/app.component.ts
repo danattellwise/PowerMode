@@ -15,6 +15,11 @@ export class AppComponent {
       if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
         e.preventDefault();
       }
+
+      if(e.key == 'a' && e.ctrlKey == true) {
+        e.preventDefault();
+      }
+
     }, false);
   }
 
