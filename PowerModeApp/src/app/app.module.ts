@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,18 +8,22 @@ import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { SalesflowPageComponent } from './salesflow-page/salesflow-page.component';
 import {ContactService} from "./Service/contact.service";
 import {SalesflowService} from "./services/salesflow.service";
+import { LoginPageComponent } from './login-page/login-page.component';
+import {LoginService} from "./Service/login.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactsPageComponent,
-    SalesflowPageComponent
+    SalesflowPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [ContactService, SalesflowService],
+  providers: [ContactService, SalesflowService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
