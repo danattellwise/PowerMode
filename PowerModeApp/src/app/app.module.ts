@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { SalesflowPageComponent } from './salesflow-page/salesflow-page.component';
 import {ContactService} from "./Service/contact.service";
+import {SalesflowService} from "./services/salesflow.service";
 import { LoginPageComponent } from './login-page/login-page.component';
 import {LoginService} from "./Service/login.service";
 
@@ -22,7 +23,7 @@ import {LoginService} from "./Service/login.service";
     AppRoutingModule,
     FormsModule
   ],
-  providers: [ContactService, LoginService],
+  providers: [ContactService, SalesflowService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
