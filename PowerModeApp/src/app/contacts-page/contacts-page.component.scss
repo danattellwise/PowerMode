@@ -1,6 +1,22 @@
 .highlight {
   background-color: #c2c3cc;
 }
+
 li{
   cursor: pointer;
+}
+
+.key-bind-box {
+  margin: 5px;
+  border: 2px solid black;
+  min-height: 52px;
+}
+
+.right-border {
+  border-right: 1px solid black;
+}
+
+.hotkey-letter {
+  font-weight: bold;
+  font-size: 20px;
 }
