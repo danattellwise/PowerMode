@@ -12,6 +12,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import {LoginService} from "./Service/login.service";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HttpInterceptorService} from "./Service/http-interceptor.service";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {HttpInterceptorService} from "./Service/http-interceptor.service";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     ContactService,

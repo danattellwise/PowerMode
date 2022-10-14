@@ -1,3 +1,9 @@
 .highlight {
   background-color: #c2c3cc;
 }
+.modal-backdrop.fade{
+  opacity: 0.5;
+}
+.modal-open .modal{
+  opacity: 1;
+}

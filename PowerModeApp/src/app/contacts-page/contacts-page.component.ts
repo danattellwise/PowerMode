@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, HostListener, Inject, OnInit} from '@angular/core';
+import { AfterViewInit, Component, HostListener, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Contacts } from '../Data/contact-mock-data';
-import {DOCUMENT} from "@angular/common";
-import {ContactService} from "../Service/contact.service";
-
+import { DOCUMENT } from "@angular/common";
+import { ContactService } from "../Service/contact.service";
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-contacts-page',
   templateUrl: './contacts-page.component.html',
@@ -11,14 +11,17 @@ import {ContactService} from "../Service/contact.service";
 export class ContactsPageComponent implements OnInit, AfterViewInit {
   currentIndex = 0;
   contacts = Contacts;
-
+  bulkActionModalOpen: boolean = false;
+  @ViewChild('content')
+  private content : any = null
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private contactService: ContactService) { }
+    private contactService: ContactService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.contactService.getContactsByChips('companies', 'walmart', 1)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         this.contacts = res.Contacts;
       });
   }
@@ -45,7 +48,20 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
     let elm = this.document.getElementById('cr' + i);
     elm?.classList.remove('highlight');
   }
-
+ 
+    bulkAction() {
+    let checkedContacts = this.contacts.filter(c => c.checked);
+    if (checkedContacts?.length > 1 && !this.bulkActionModalOpen) {
+      this.bulkActionModalOpen = true;
+      this.modalService.open(this.content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+        // this.closeResult = `Closed with: ${result}`;
+      this.bulkActionModalOpen = false;
+      }, (reason: any) => {
+      this.bulkActionModalOpen = false;          
+        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+  } 
   @HostListener('document:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
     switch (event.key) {
@@ -84,10 +100,11 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
       case ' ':
         this.contacts[this.currentIndex].checked = !this.contacts[this.currentIndex].checked;
         break;
-
+      case 'Shift':
+         this.bulkAction();
+        break;
       default:
         break;
     }
   }
-
 }
