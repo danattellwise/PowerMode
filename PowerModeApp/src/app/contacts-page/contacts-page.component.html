@@ -1,34 +1,20 @@
 <table id="foobar" class="table table-hover">
-    <thead>
-      <tr>
-        <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Company</th>
-        <th scope="col">Email</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let contact of contacts; let i = index">
-      <tr id="{{'cr' + i}}">
-        <td><input type="checkbox" value="{{contact.Id}}" [(ngModel)]="contacts[i].checked"></td>
-        <td>{{ i+1 }}</td>
-        <td>{{ contact.Name }}</td>
-        <td>{{ contact.Company }}</td>
-        <td>{{ contact.Email }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Bulk Action</h4>
-      <button type="button" class="btn-close" aria-div="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    <div class="modal-body"> 
-         <div > Subscription settings</div>
-        <div> Add to Task</div>
-      <div> Email/Call</div> 
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div>
-  </ng-template>
+  <thead>
+    <tr>
+      <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Company</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let contact of contacts; let i = index">
+    <tr id="{{'cr' + i}}">
+      <td><input type="checkbox" value="{{contact.Id}}" [(ngModel)]="contacts[i].checked"></td>
+      <td>{{ i+1 }}</td>
+      <td>{{ contact.Name }}</td>
+      <td>{{ contact.Company }}</td>
+      <td>{{ contact.Email }}</td>
+    </tr>
+  </tbody>
+</table>
