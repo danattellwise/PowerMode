@@ -24,7 +24,7 @@ export class AppComponent {
   }
 
   title = 'PowerModeApp';
-  overlayShowing: boolean = false;
+  isLegendShowing: boolean = false;
 
   @HostListener('document:keypress', ['$event'])
   navigate(event: KeyboardEvent) {
@@ -43,7 +43,7 @@ export class AppComponent {
 
       case '`':
         // This toggles the legend overlay
-        this.overlayShowing = !this.overlayShowing;
+        this.isLegendShowing = !this.isLegendShowing;
         break;
       default:
         return;
