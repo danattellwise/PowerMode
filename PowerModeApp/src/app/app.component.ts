@@ -20,6 +20,10 @@ export class AppComponent {
         e.preventDefault();
       }
 
+      if(e.key == 'p' && e.ctrlKey == true) {
+        e.preventDefault();
+      }
+
     }, false);
   }
 

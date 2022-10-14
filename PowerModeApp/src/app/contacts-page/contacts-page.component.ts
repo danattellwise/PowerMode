@@ -2,6 +2,7 @@ import {AfterViewInit, Component, HostListener, Inject, OnInit} from '@angular/c
 import { Contacts } from '../Data/contact-mock-data';
 import {DOCUMENT} from "@angular/common";
 import {ContactService} from "../Service/contact.service";
+import { PowerModeService } from '../Service/power-mode.service';
 
 @Component({
   selector: 'app-contacts-page',
@@ -14,7 +15,8 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private contactService: ContactService) { }
+    private contactService: ContactService,
+    private powerModeService: PowerModeService) { }
 
   ngOnInit(): void {
     this.contactService.getContactsByChips('companies', 'walmart', 1)
@@ -58,6 +60,18 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
           } else {
             this.contacts.forEach(c => c.checked = true);
           }
+        }
+        break;
+
+      case 'p':
+        if (event.ctrlKey == true) {
+          let selectedContacts: any[] = [];
+          this.contacts.forEach(c => {
+            if(c.checked) {
+              selectedContacts.push(c);
+            }
+          });
+          this.powerModeService.setContacts(selectedContacts);
         }
         break;
 

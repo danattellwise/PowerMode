@@ -14,6 +14,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HttpInterceptorService} from "./Service/http-interceptor.service";
 import {KeyBindService} from "./Service/key-bind.service";
 import { LegendComponent } from './legend/legend.component';
+import { PowerModeService } from './Service/power-mode.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { LegendComponent } from './legend/legend.component';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true
-    }],
+    },
+    PowerModeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
