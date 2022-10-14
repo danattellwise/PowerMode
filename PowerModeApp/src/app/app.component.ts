@@ -20,6 +20,10 @@ export class AppComponent {
         e.preventDefault();
       }
 
+      if(e.key == 'p' && e.ctrlKey == true) {
+        e.preventDefault();
+      }
+
     }, false);
   }
 
@@ -40,6 +44,7 @@ export class AppComponent {
       case '5':
         this.router.navigateByUrl('/login');
         break;
+
 
       case '`':
         // This toggles the legend overlay

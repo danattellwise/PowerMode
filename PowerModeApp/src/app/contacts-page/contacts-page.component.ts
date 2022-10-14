@@ -1,8 +1,12 @@
 import { AfterViewInit, Component, HostListener, Inject, OnInit, ViewChild } from '@angular/core';
 import { Contacts } from '../Data/contact-mock-data';
-import { DOCUMENT } from "@angular/common";
-import { ContactService } from "../Service/contact.service";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {DOCUMENT} from "@angular/common";
+import {ContactService} from "../Service/contact.service";
+import {SalesflowService} from "../services/salesflow.service";
+import {KeyBindService} from "../Service/key-bind.service";
+import {Router} from "@angular/router";
+
 @Component({
   selector: 'app-contacts-page',
   templateUrl: './contacts-page.component.html',
@@ -19,7 +23,10 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private contactService: ContactService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private salesflowService: SalesflowService,
+    private keyBindService: KeyBindService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.contactService.getContactsByChips('companies', 'walmart', 1)
@@ -33,13 +40,16 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
   }
 
   checkAllCheckBox(ev: any) {
-    this.contacts.forEach(c => c.checked = ev.target.checked);
+    this.contacts.forEach((c: any) => c.checked = ev.target.checked);
   }
 
   isAllCheckBoxChecked() {
-    return this.contacts.every(c => c.checked);
+    return this.contacts.every((c: any) => c.checked);
   }
 
+  toggleCheckbox(contact: any) {
+    contact.checked = !contact.checked;
+  }
 
   addHighlightClass(i: any) {
     let elm = this.document.getElementById('cr' + i);
@@ -75,12 +85,12 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
     switch (event.key) {
       case 'a':
         if (event.ctrlKey == true) {
-          const allAreSelected = this.contacts.every(c => c.checked == true);
+          const allAreSelected = this.contacts.every((c: any) => c.checked == true);
 
           if (allAreSelected) {
-            this.contacts.forEach(c => c.checked = false);
+            this.contacts.forEach((c:any) => c.checked = false);
           } else {
-            this.contacts.forEach(c => c.checked = true);
+            this.contacts.forEach((c:any) => c.checked = true);
           }
         }
         break;
@@ -113,10 +123,39 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
         this.bulkAction();
         break;
       
-      case '1': this.toggleSetting();
+      case '1':
+        this.toggleSetting();
+        break;
+      
+      case 'q':
+        let selectedContacts = this.contacts.filter((c:any) => c.checked);
+        selectedContacts.forEach((c:any) => {
+          delete c['checked'];
+        });
+
+        const keyBind = this.keyBindService.getKeyBindByLetter('q');
+
+        // Call appropriate service as per the action
+        this.callServiceAssociatedToAction(keyBind, selectedContacts);
+        break;
+
+      case 'p':
+        if(event.ctrlKey === true)
+          this.router.navigateByUrl('/power-mode');
         break;
 
       default:
+        break;
+    }
+  }
+
+  private callServiceAssociatedToAction(keyBind: any, contacts: any) {
+    const actionType = keyBind.actionType;
+    const resourceId = keyBind.resourceId || 0;
+
+    switch (actionType) {
+      case 'ADD_TO_SALESFLOW' :
+        this.salesflowService.addToSalesflow(contacts, resourceId);
         break;
     }
   }

@@ -15,6 +15,7 @@ import {HttpInterceptorService} from "./Service/http-interceptor.service";
 import {KeyBindService} from "./Service/key-bind.service";
 import { LegendComponent } from './legend/legend.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PowerModeComponent } from './power-mode/power-mode.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ContactsPageComponent,
     SalesflowPageComponent,
     LoginPageComponent,
-    LegendComponent
+    LegendComponent,
+    PowerModeComponent
   ],
   imports: [
     BrowserModule,
