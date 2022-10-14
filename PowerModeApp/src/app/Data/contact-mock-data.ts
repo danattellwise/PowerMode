@@ -7,7 +7,8 @@ export const Contacts = [
     Email: "aaron.fuller@wal-mart.com",
     Id: 1134212788101171,
     Salesflows: ["102500_200"],
-    checked: false
+    checked: false,
+    DoNotEmail:true
   },
 
  {
@@ -29,7 +30,8 @@ export const Contacts = [
     Email: "adarsh.kumar@costco.com",
     Id: 1134212788072466,
     Salesflows: [],
-    checked: false
+    checked: false,
+    DoNotEmail:true 
   },
 
   {

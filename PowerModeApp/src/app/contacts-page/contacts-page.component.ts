@@ -1,5 +1,6 @@
-import {AfterViewInit, Component, HostListener, Inject, OnInit} from '@angular/core';
+import { AfterViewInit, Component, HostListener, Inject, OnInit, ViewChild } from '@angular/core';
 import { Contacts } from '../Data/contact-mock-data';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {DOCUMENT} from "@angular/common";
 import {ContactService} from "../Service/contact.service";
 import {SalesflowService} from "../services/salesflow.service";
@@ -16,9 +17,14 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
   contacts = Contacts;
   keyBinds: any;
 
+  @ViewChild('content')
+  private content: any = null
+  bulkActionModalOpen: any = false;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private contactService: ContactService,
+    private modalService: NgbModal,
     private salesflowService: SalesflowService,
     private keyBindService: KeyBindService,
     private router: Router) { }
@@ -57,6 +63,25 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
     elm?.classList.remove('highlight');
   }
 
+  bulkAction() {
+    let checkedContacts = this.contacts.filter(c => c.checked);
+    if (checkedContacts?.length > 1 && !this.bulkActionModalOpen) {
+      this.bulkActionModalOpen = true;
+      this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result: any) => {
+        // this.closeResult = `Closed with: ${result}`;
+        this.bulkActionModalOpen = false;
+      }, (reason: any) => {
+        this.bulkActionModalOpen = false;
+        // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+  }
+
+  toggleSetting() {
+    this.contacts.filter(c => c.checked).forEach(contact => contact.DoNotEmail = !contact.DoNotEmail)
+    this.modalService.dismissAll();
+    this.bulkActionModalOpen = false;
+  }
   @HostListener('document:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
     switch (event.key) {
@@ -96,6 +121,14 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
         this.contacts[this.currentIndex].checked = !this.contacts[this.currentIndex].checked;
         break;
 
+      case 'Shift':
+        this.bulkAction();
+        break;
+      
+      case '1':
+        this.toggleSetting();
+        break;
+      
       case 'q':
         let selectedContacts = this.contacts.filter((c:any) => c.checked);
         selectedContacts.forEach((c:any) => {
