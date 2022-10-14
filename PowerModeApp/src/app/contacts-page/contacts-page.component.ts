@@ -15,6 +15,7 @@ import {Router} from "@angular/router";
 export class ContactsPageComponent implements OnInit, AfterViewInit {
   currentIndex = 0;
   contacts = Contacts;
+  keyBinds: any;
 
   @ViewChild('content')
   private content: any = null
@@ -29,6 +30,7 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.keyBinds = this.keyBindService.getKeyBinds();
     this.contactService.getContactsByChips('companies', 'walmart', 1)
       .subscribe(res => {
         this.contacts = res.Contacts;
@@ -65,7 +67,7 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
     let checkedContacts = this.contacts.filter(c => c.checked);
     if (checkedContacts?.length > 1 && !this.bulkActionModalOpen) {
       this.bulkActionModalOpen = true;
-      this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result: any) => {
         // this.closeResult = `Closed with: ${result}`;
         this.bulkActionModalOpen = false;
       }, (reason: any) => {
