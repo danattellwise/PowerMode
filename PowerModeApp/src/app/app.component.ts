@@ -45,10 +45,7 @@ export class AppComponent {
         this.router.navigateByUrl('/login');
         break;
 
-      case 'p':
-        if(event.ctrlKey === true)
-          this.router.navigateByUrl('/power-mode');
-        break;
+
       case '`':
         // This toggles the legend overlay
         this.isLegendShowing = !this.isLegendShowing;
