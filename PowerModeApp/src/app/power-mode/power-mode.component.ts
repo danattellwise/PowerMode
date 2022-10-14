@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { Contacts } from '../Data/contact-mock-data';
-// import { PowerModeService } from '../Service/power-mode.service';
+import { PowerModeService } from '../Service/power-mode.service';
 
 @Component({
   selector: 'app-power-mode',
@@ -16,7 +16,7 @@ selectedContact = this.selectedContacts[0];
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    // private powerModeService: PowerModeService
+    private powerModeService: PowerModeService
     ) { }
 
   ngOnInit(): void {
@@ -24,6 +24,7 @@ selectedContact = this.selectedContacts[0];
     //   .subscribe(res => {
     //     this.contacts = res.Contacts;
     //   });
+    this.contacts = this.powerModeService.getContacts();
   }
 
   ngAfterViewInit(): void {

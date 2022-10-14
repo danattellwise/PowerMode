@@ -108,6 +108,7 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
             }
           });
           this.powerModeService.setContacts(selectedContacts);
+          this.router.navigateByUrl('/power-mode');
         }
         break;
 
@@ -153,11 +154,6 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
 
         // Call appropriate service as per the action
         this.callServiceAssociatedToAction(keyBind, selectedContacts);
-        break;
-
-      case 'p':
-        if(event.ctrlKey === true)
-          this.router.navigateByUrl('/power-mode');
         break;
 
       default:
