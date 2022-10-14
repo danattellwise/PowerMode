@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { SalesFlow } from './contracts/salesflow';
 import { SalesflowService } from './services/salesflow.service';
 import { Router } from '@angular/router';

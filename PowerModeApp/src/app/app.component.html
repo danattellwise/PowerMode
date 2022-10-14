@@ -7,33 +7,49 @@
 
 <body class="bg-light">
   <div class="container-fluid nav-container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#"><i class="bi bi-lightning-fill"></i>PowerOS</a>
+    <div class="row">
+      <div class="col-8">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">PowerOS</a>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/contacts"><i class="bi bi-1-square-fill"></i> Contacts</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/salesflows"><i class="bi bi-2-square-fill"></i> Salesflows</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#3"><i class="bi bi-3-square-fill"></i> Support</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#4"><i class="bi bi-4-square-fill"></i> Options</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login"><i class="bi bi-5-square-fill"></i> Login</a>
-          </li>
-        </ul>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/contacts"><i class="bi bi-1-square-fill"></i> Contacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/salesflows"><i class="bi bi-2-square-fill"></i> Salesflows</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#3"><i class="bi bi-3-square-fill"></i> Support</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#4"><i class="bi bi-4-square-fill"></i> Options</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login"><i class="bi bi-5-square-fill"></i> Login</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
-    </nav>
+      <div class="col-4">
+        <nav class="navbar navbar-expand-sm bg-light">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/power-mode"><i class="bi bi-lightning-fill"></i>PowerMode</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="isLegendShowing = !isLegendShowing"><i class="bi bi-keyboard"></i> Legend</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </div>
 </body>
 <div class="container-fluid">

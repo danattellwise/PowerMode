@@ -9,24 +9,24 @@ import { KeyBindService } from '../Service/key-bind.service';
 export class LegendComponent implements OnInit {
   keyMap: any = {
     q: {
-      actionType: null,   // ADD_TO_SALESFLOW
-      resourceId: null,
-      resourceName: null
+      actionType: 'No Action Assigned',   // ADD_TO_SALESFLOW
+      resourceId: 'Unassigned',
+      resourceName: 'No Salesflow Assigned'
     },
     w: {
-      actionType: null,
-      resourceId: null,
-      resourceName: null
+      actionType: 'No Action Assigned',
+      resourceId: 'Unassigned',
+      resourceName: 'No Salesflow Assigned'
     },
     e: {
-      actionType: null,
-      resourceId: null,
-      resourceName: null
+      actionType: 'No Action Assigned',
+      resourceId: 'Unassigned',
+      resourceName: 'No Salesflow Assigned'
     },
     r: {
-      actionType: null,
-      resourceId: null,
-      resourceName: null
+      actionType: 'No Action Assigned',
+      resourceId: 'Unassigned',
+      resourceName: 'No Salesflow Assigned'
     },
   };
 
@@ -40,11 +40,5 @@ export class LegendComponent implements OnInit {
 
   updateLegend() {
     this.keyMap = this.keybindService.getKeyBinds();
-    const keys = Object.entries(this.keyMap);
-
-    keys.forEach(key => {
-      if(key[0] == null)
-        key[0] = 'Unassigned';
-    })
   }
 }
