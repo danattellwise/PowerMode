@@ -9,7 +9,7 @@ import { KeyBindService } from '../Service/key-bind.service';
 export class LegendComponent implements OnInit {
   keyMap: any = {
     q: {
-      actionType: 'test',   // ADD_TO_SALESFLOW
+      actionType: null,   // ADD_TO_SALESFLOW
       resourceId: null,
       resourceName: null
     },
