@@ -1,10 +1,63 @@
 <div class="container-fluid">
+
   <div class="row">
-    <div class="col-3">Q - {{keyBinds.q.actionType}} - {{keyBinds.q.resourceName}}</div>
-    <div class="col-3">W - {{keyBinds.w.actionType}} - {{keyBinds.w.resourceName}}</div>
-    <div class="col-3">E - {{keyBinds.e.actionType}} - {{keyBinds.e.resourceName}}</div>
-    <div class="col-3">R - {{keyBinds.r.actionType}} - {{keyBinds.r.resourceName}}</div>
+    <div class="col-2">
+      <div class="row key-bind-box">
+        <div class="col-2">q</div>
+        <div class="col-10">
+          <div class="row">
+            <div class="col">{{keyBinds.q.actionType}}</div>
+          </div>
+          <div class="row">
+            <div class="col">{{keyBinds.q.resourceName}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="row key-bind-box">
+        <div class="col-2">w</div>
+        <div class="col-10">
+          <div class="row">
+            <div class="col">{{keyBinds.w.actionType}}</div>
+          </div>
+          <div class="row">
+            <div class="col">{{keyBinds.w.resourceName}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="row key-bind-box">
+        <div class="col-2">e</div>
+        <div class="col-10">
+          <div class="row">
+            <div class="col">{{keyBinds.e.actionType}}</div>
+          </div>
+          <div class="row">
+            <div class="col">{{keyBinds.e.resourceName}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="row key-bind-box">
+        <div class="col-2">r</div>
+        <div class="col-10">
+          <div class="row">
+            <div class="col">{{keyBinds.r.actionType}}</div>
+          </div>
+          <div class="row">
+            <div class="col">{{keyBinds.r.resourceName}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>
 
 <div *ngIf="!loading">
