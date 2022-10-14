@@ -17,6 +17,7 @@ export class SalesflowPageComponent implements OnInit, AfterViewInit {
   currentPage = 1;
   maxPage = 1;
   pageSize = 20;
+  keyBinds: any;
 
   constructor(
     private salesflowService: SalesflowService,
@@ -25,6 +26,7 @@ export class SalesflowPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initializeSalesflows();
+    this.keyBinds = this.keyBindService.getKeyBinds();
   }
 
   ngAfterViewInit(): void {
@@ -121,6 +123,9 @@ export class SalesflowPageComponent implements OnInit, AfterViewInit {
         break;
 
       case 'q':
+      case 'w':
+      case 'e':
+      case 'r':
         const actionType = 'ADD_TO_SALESFLOW';
         const resourceId = this.salesflowsToShow[this.currentIndex].Id;
         const resourceName = this.salesflowsToShow[this.currentIndex].Title;
@@ -131,8 +136,8 @@ export class SalesflowPageComponent implements OnInit, AfterViewInit {
           resourceName
         };
 
-        this.keyBindService.setKeyBind(keyBind, 'q');
-
+        this.keyBindService.setKeyBind(keyBind, event.key);
+        this.keyBinds = this.keyBindService.getKeyBinds();
         break;
 
       default:
