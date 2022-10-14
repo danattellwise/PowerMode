@@ -13,13 +13,16 @@ import {LoginService} from "./Service/login.service";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HttpInterceptorService} from "./Service/http-interceptor.service";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {KeyBindService} from "./Service/key-bind.service";
+import { LegendComponent } from './legend/legend.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactsPageComponent,
     SalesflowPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    LegendComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ContactService,
     SalesflowService,
     LoginService,
+    KeyBindService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,

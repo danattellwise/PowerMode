@@ -1,58 +1,71 @@
-<!--<div *ngIf="!loading">-->
-<!--  <table class="table" >-->
-<!--    <thead>-->
-<!--      <tr>-->
-<!--        <th scope="col"><input type="checkbox" [checked]="isCheckboxChecked()" (change)="checkAllCheckBox($event)"></th>-->
-<!--        <th scope="col">#</th>-->
-<!--        <th scope="col">Salesflow Id</th>-->
-<!--        <th scope="col">Salesflow Name</th>-->
-<!--        <th scope="col">Owner Id</th>-->
-<!--        <th scope="col">Total Steps</th>-->
-<!--        <th scope="col">Created At</th>-->
-<!--      </tr>-->
-<!--    </thead>-->
-
-<!--    <tbody>-->
-<!--      <tr *ngFor="let salesflow of salesflowsToShow; let i = index;">-->
-<!--        <td><input type="checkbox" [checked]="salesflow.checked" (change)="toggleCheckbox(salesflow)"></td>-->
-<!--        <td>{{salesflow.Row}}</td>-->
-<!--        <td>{{salesflow.Id}}</td>-->
-<!--        <td>{{salesflow.Title}}</td>-->
-<!--        <td>{{salesflow.OwnerId}}</td>-->
-<!--        <td>{{salesflow.StepCount}}</td>-->
-<!--        <td>{{salesflow.CreatedAt}}</td>-->
-<!--      </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--</div>-->
-
-<div *ngIf="!loading">
-  <div class="container-fluid">
-    <div class="row table-head">
-      <div class="col-1">
-        <div class="row">
-          <div class="col"><input type="checkbox" [checked]="isCheckboxChecked()" (change)="checkAllCheckBox($event)"></div>
-          <div class="col">#</div>
-        </div>
-      </div>
-      <div class="col-1">Salesflow Id</div>
-      <div class="col-4">Title</div>
-      <div class="col-1">Owner</div>
-      <div class="col-2">Steps</div>
-      <div class="col-2">CreatedAt</div>
-    </div>
-    <div class="row padding-5" *ngFor="let salesflow of salesflowsToShow; let i = index;">
-      <div class="col-1">
-        <div class="row">
-          <div class="col"><input type="checkbox" [checked]="salesflow.checked" (change)="toggleCheckbox(salesflow)"></div>
-          <div class="col">{{salesflow.Row}}</div>
-        </div>
-      </div>
-      <div class="col-1">{{salesflow.Id}}</div>
-      <div class="col-4">{{salesflow.Title}}</div>
-      <div class="col-1">{{salesflow.OwnerId}}</div>
-      <div class="col-2">{{salesflow.StepCount}}</div>
-      <div class="col-2">{{salesflow.CreatedAt}}</div>
-    </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">Q</div>
+    <div class="col-3">W</div>
+    <div class="col-3">E</div>
+    <div class="col-3">R</div>
   </div>
 </div>
+
+<div *ngIf="!loading">
+  <table class="table table-hover" >
+    <thead>
+      <tr>
+        <th scope="col"><input type="checkbox" [checked]="isCheckboxChecked()" (change)="checkAllCheckBox($event)"></th>
+        <th scope="col">#</th>
+        <th scope="col">Salesflow Id</th>
+        <th scope="col">Salesflow Name</th>
+        <th scope="col">Owner Id</th>
+        <th scope="col">Total Steps</th>
+        <th scope="col">Created At</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let salesflow of salesflowsToShow; let i = index;" id="{{'cr' + i}}">
+        <td><input type="checkbox" [checked]="salesflow.checked" (change)="toggleCheckbox(salesflow)"></td>
+        <td>{{salesflow.Row}}</td>
+        <td>{{salesflow.Id}}</td>
+        <td>{{salesflow.Title}}</td>
+        <td>{{salesflow.OwnerId}}</td>
+        <td>{{salesflow.StepCount}}</td>
+        <td>{{salesflow.CreatedAt}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<!--<div *ngIf="!loading">-->
+<!--  <div class="container-fluid">-->
+<!--    <div class="row table-head">-->
+<!--      <div class="col-1">-->
+<!--        <div class="row">-->
+<!--          <div class="col">-->
+<!--            <input type="checkbox" [checked]="isCheckboxChecked()" (change)="checkAllCheckBox($event)">-->
+<!--          </div>-->
+<!--          <div class="col">#</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-1">Salesflow Id</div>-->
+<!--      <div class="col-4">Title</div>-->
+<!--      <div class="col-1">Owner</div>-->
+<!--      <div class="col-2">Steps</div>-->
+<!--      <div class="col-2">CreatedAt</div>-->
+<!--    </div>-->
+<!--    <div class="row padding-5" *ngFor="let salesflow of salesflowsToShow; let i = index;">-->
+<!--      <div class="col-1">-->
+<!--        <div class="row">-->
+<!--          <div class="col"><input type="checkbox" [checked]="salesflow.checked" (change)="toggleCheckbox(salesflow)"></div>-->
+<!--          <div class="col">{{salesflow.Row}}</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-1">{{salesflow.Id}}</div>-->
+<!--      <div class="col-4">{{salesflow.Title}}</div>-->
+<!--      <div class="col-1">{{salesflow.OwnerId}}</div>-->
+<!--      <div class="col-2">{{salesflow.StepCount}}</div>-->
+<!--      <div class="col-2">{{salesflow.CreatedAt}}</div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

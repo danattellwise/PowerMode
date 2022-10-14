@@ -7,7 +7,18 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class SalesflowService {
- 
+  // keyBind: any = {
+  //   q: {
+  //     salesflowId: null
+  //     name:
+  //   },
+  //   w: {},
+  //   e: {},
+  //   r: {},
+  // };
+
+
+
   constructor(private http: HttpClient) { }
 
   getSalesflowData(): Observable<any>{
