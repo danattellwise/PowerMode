@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, HostListener, Inject, OnInit} from '@angular/core';
 import { Contacts } from '../Data/contact-mock-data';
 import {DOCUMENT} from "@angular/common";
+import {ContactService} from "../Service/contact.service";
 
 @Component({
   selector: 'app-contacts-page',
@@ -11,10 +12,15 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
   currentIndex = 0;
   contacts = Contacts;
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private contactService: ContactService) { }
 
   ngOnInit(): void {
-    // this.addHighlightClassOnLoad();
+    this.contactService.getContactsByChips('companies', 'walmart', 1)
+      .subscribe(res => {
+        this.contacts = res.Contacts;
+      });
   }
 
   ngAfterViewInit(): void {

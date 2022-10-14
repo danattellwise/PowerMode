@@ -10,6 +10,8 @@ import {ContactService} from "./Service/contact.service";
 import {SalesflowService} from "./services/salesflow.service";
 import { LoginPageComponent } from './login-page/login-page.component';
 import {LoginService} from "./Service/login.service";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HttpInterceptorService} from "./Service/http-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -21,9 +23,18 @@ import {LoginService} from "./Service/login.service";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [ContactService, SalesflowService, LoginService],
+  providers: [
+    ContactService,
+    SalesflowService,
+    LoginService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

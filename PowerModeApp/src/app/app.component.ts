@@ -28,22 +28,23 @@ export class AppComponent {
 
   @HostListener('document:keypress', ['$event'])
   navigate(event: KeyboardEvent) {
-    console.log(event);
-
     switch(event.key){
-      case '1': {
+      case '1':
         this.router.navigateByUrl('/contacts');
         break;
-      }
-      case '2': {
+
+      case '2':
         this.router.navigateByUrl('/salesflows');
         break;
-      }
-      case '`': {
+
+      case '5':
+        this.router.navigateByUrl('/login');
+        break;
+
+      case '`':
         // This toggles the legend overlay
         this.overlayShowing = !this.overlayShowing;
         break;
-      }
       default:
         return;
     }
