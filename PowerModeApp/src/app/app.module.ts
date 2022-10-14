@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContactsPageComponent } from './contacts-page/contacts-page.component';
@@ -15,6 +14,7 @@ import {HttpInterceptorService} from "./Service/http-interceptor.service";
 import {KeyBindService} from "./Service/key-bind.service";
 import { LegendComponent } from './legend/legend.component';
 import { PowerModeService } from './Service/power-mode.service';
+import { PowerModeComponent } from './power-mode/power-mode.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { PowerModeService } from './Service/power-mode.service';
     ContactsPageComponent,
     SalesflowPageComponent,
     LoginPageComponent,
-    LegendComponent
+    LegendComponent,
+    PowerModeComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,7 @@ import { PowerModeService } from './Service/power-mode.service';
       useClass: HttpInterceptorService,
       multi: true
     },
-    PowerModeService
+    PowerModeService,
   ],
   bootstrap: [AppComponent]
 })

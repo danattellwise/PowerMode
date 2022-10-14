@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'; 
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs'
 import {data}  from '../../assets/salesflowData'
 import {HttpClient} from "@angular/common/http";
@@ -7,17 +7,6 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class SalesflowService {
-  // keyBind: any = {
-  //   q: {
-  //     salesflowId: null
-  //     name:
-  //   },
-  //   w: {},
-  //   e: {},
-  //   r: {},
-  // };
-
-
 
   constructor(private http: HttpClient) { }
 
@@ -27,5 +16,22 @@ export class SalesflowService {
 
   getSalesflows() {
     return this.http.get<any>('https://engage-app-staging.zoominfo.com/rest/v1/workflow_templates/dashboard');
+  }
+
+  addToSalesflow(contacts: any, salesflowId: number) {
+    console.log('call to add salesflow', salesflowId);
+    const salesflowReq = {
+      Contacts: contacts,
+      IsOwnerAccordingToData: false,
+      SenderId: 1075757593142466,
+      StartedAt: null,
+      WorkflowTemplateId: salesflowId
+    };
+
+    this.http.post<any>('https://engage-app-staging.zoominfo.com/rest/v1/workflows', salesflowReq)
+      .subscribe((res) => {
+        const response = res;
+        console.log('Response is:::', response);
+      });
   }
 }
