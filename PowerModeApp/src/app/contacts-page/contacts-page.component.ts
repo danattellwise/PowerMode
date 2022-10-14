@@ -3,6 +3,7 @@ import { Contacts } from '../Data/contact-mock-data';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {DOCUMENT} from "@angular/common";
 import {ContactService} from "../Service/contact.service";
+import { PowerModeService } from '../Service/power-mode.service';
 import {SalesflowService} from "../services/salesflow.service";
 import {KeyBindService} from "../Service/key-bind.service";
 import {Router} from "@angular/router";
@@ -24,6 +25,7 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private contactService: ContactService,
+    private powerModeService: PowerModeService,
     private modalService: NgbModal,
     private salesflowService: SalesflowService,
     private keyBindService: KeyBindService,
@@ -94,6 +96,18 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
           } else {
             this.contacts.forEach((c:any) => c.checked = true);
           }
+        }
+        break;
+
+      case 'p':
+        if (event.ctrlKey == true) {
+          let selectedContacts: any[] = [];
+          this.contacts.forEach(c => {
+            if(c.checked) {
+              selectedContacts.push(c);
+            }
+          });
+          this.powerModeService.setContacts(selectedContacts);
         }
         break;
 
