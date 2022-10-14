@@ -1,13 +1,16 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostListener, Inject, OnInit} from '@angular/core';
 import {SalesflowService} from "../services/salesflow.service";
 import {SalesFlow} from "../contracts/salesflow";
+import {DOCUMENT} from "@angular/common";
+import {KeyBindService} from "../Service/key-bind.service";
 
 @Component({
   selector: 'app-salesflow-page',
   templateUrl: './salesflow-page.component.html',
   styleUrls: ['./salesflow-page.component.scss']
 })
-export class SalesflowPageComponent implements OnInit {
+export class SalesflowPageComponent implements OnInit, AfterViewInit {
+  currentIndex = 0;
   loading = false;
   salesflows: any = [];
   salesflowsToShow: any = [];
@@ -15,23 +18,33 @@ export class SalesflowPageComponent implements OnInit {
   maxPage = 1;
   pageSize = 20;
 
-  constructor(private salesflowService: SalesflowService) { }
+  constructor(
+    private salesflowService: SalesflowService,
+    @Inject(DOCUMENT) private document: Document,
+    private keyBindService: KeyBindService) { }
 
   ngOnInit(): void {
     this.initializeSalesflows();
   }
 
+  ngAfterViewInit(): void {
+    this.addHighlightClass(this.currentIndex);
+  }
+
   initializeSalesflows() {
     this.loading = true;
-    this.salesflowService.getSalesflows().subscribe((res:SalesFlow[]) => {
-     this.salesflows = res;
-     for(let i = 0; i < this.salesflows.length; i++) {
-       this.salesflows[i].Row = i + 1;
-     }
-     this.maxPage = Math.ceil(this.salesflows.length / this.pageSize);
-     this.updateSalesflowsPage();
-     this.loading = false;
-    })
+
+    if(this.salesflows.length == 0) {
+      this.salesflowService.getSalesflows().subscribe((res:SalesFlow[]) => {
+        this.salesflows = res;
+        for(let i = 0; i < this.salesflows.length; i++) {
+          this.salesflows[i].Row = i + 1;
+        }
+        this.maxPage = Math.ceil(this.salesflows.length / this.pageSize);
+        this.updateSalesflowsPage();
+        this.loading = false;
+      });
+    }
   }
 
   isCheckboxChecked() {
@@ -52,34 +65,43 @@ export class SalesflowPageComponent implements OnInit {
     this.salesflowsToShow = this.salesflows.slice(start, end);
   }
 
+  addHighlightClass(i: any) {
+    let elm = this.document.getElementById('cr' + i);
+    elm?.classList.add('highlight');
+  }
+
+  removeHighlightClass(i: any) {
+    let elm = this.document.getElementById('cr' + i);
+    elm?.classList.remove('highlight');
+  }
+
   @HostListener('document:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
     console.log('===-=====', event);
     switch (event.key) {
-      // TODO: Implement for salesflow page
-      // case 'ArrowDown':
-      //   this.removeHighlightClass(this.currentIndex);
-      //   if (this.currentIndex >= this.contacts.length - 1) {
-      //     this.currentIndex = 0;
-      //   } else {
-      //     this.currentIndex++;
-      //   }
-      //   this.addHighlightClass(this.currentIndex);
-      //   break;
-      //
-      // case 'ArrowUp':
-      //   this.removeHighlightClass(this.currentIndex);
-      //   if (this.currentIndex <= 0) {
-      //     this.currentIndex = this.contacts.length - 1;
-      //   } else {
-      //     this.currentIndex--;
-      //   }
-      //   this.addHighlightClass(this.currentIndex);
-      //   break;
-      //
-      // case ' ':
-      //   this.contacts[this.currentIndex].checked = !this.contacts[this.currentIndex].checked;
-      //   break;
+      case 'ArrowDown':
+        this.removeHighlightClass(this.currentIndex);
+        if (this.currentIndex >= this.salesflows.length - 1) {
+          this.currentIndex = 0;
+        } else {
+          this.currentIndex++;
+        }
+        this.addHighlightClass(this.currentIndex);
+        break;
+
+      case 'ArrowUp':
+        this.removeHighlightClass(this.currentIndex);
+        if (this.currentIndex <= 0) {
+          this.currentIndex = this.salesflows.length - 1;
+        } else {
+          this.currentIndex--;
+        }
+        this.addHighlightClass(this.currentIndex);
+        break;
+
+      case ' ':
+        this.salesflows[this.currentIndex].checked = !this.salesflows[this.currentIndex].checked;
+        break;
       case 'ArrowLeft':
         if (this.currentPage == 1) {
           break;
@@ -96,6 +118,21 @@ export class SalesflowPageComponent implements OnInit {
           this.currentPage++;
         }
         this.updateSalesflowsPage();
+        break;
+
+      case 'q':
+        const actionType = 'ADD_TO_SALESFLOW';
+        const resourceId = this.salesflowsToShow[this.currentIndex].Id;
+        const resourceName = this.salesflowsToShow[this.currentIndex].Title;
+
+        const keyBind = {
+          actionType,
+          resourceId,
+          resourceName
+        };
+
+        this.keyBindService.setKeyBind(keyBind, 'q');
+
         break;
 
       default:
