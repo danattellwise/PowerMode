@@ -6,24 +6,24 @@ import { Injectable } from '@angular/core';
 export class KeyBindService {
   keyBinds: any = {
     q: {
-      actionType: null,   // ADD_TO_SALESFLOW
-      resourceId: null,
-      resourceName: null
+      actionType: 'No Action Assigned',   // ADD_TO_SALESFLOW
+      resourceId: 'Unassigned',
+      resourceName: 'No Salesflow Assigned'
     },
     w: {
-      actionType: null,
-      resourceId: null,
-      resourceName: null
+      actionType: 'No Action Assigned',
+      resourceId: 'Unassigned',
+      resourceName: 'No Salesflow Assigned'
     },
     e: {
-      actionType: null,
-      resourceId: null,
-      resourceName: null
+      actionType: 'No Action Assigned',
+      resourceId: 'Unassigned',
+      resourceName: 'No Salesflow Assigned'
     },
     r: {
-      actionType: null,
-      resourceId: null,
-      resourceName: null
+      actionType: 'No Action Assigned',
+      resourceId: 'Unassigned',
+      resourceName: 'No Salesflow Assigned'
     },
   };
 
