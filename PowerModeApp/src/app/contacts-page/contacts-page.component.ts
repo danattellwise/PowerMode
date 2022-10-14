@@ -4,6 +4,7 @@ import {DOCUMENT} from "@angular/common";
 import {ContactService} from "../Service/contact.service";
 import {SalesflowService} from "../services/salesflow.service";
 import {KeyBindService} from "../Service/key-bind.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-contacts-page',
@@ -18,7 +19,8 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
     @Inject(DOCUMENT) private document: Document,
     private contactService: ContactService,
     private salesflowService: SalesflowService,
-    private keyBindService: KeyBindService) { }
+    private keyBindService: KeyBindService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.contactService.getContactsByChips('companies', 'walmart', 1)
@@ -102,6 +104,11 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
 
         // Call appropriate service as per the action
         this.callServiceAssociatedToAction(keyBind, selectedContacts);
+        break;
+
+      case 'p':
+        if(event.ctrlKey === true)
+          this.router.navigateByUrl('/power-mode');
         break;
 
       default:
