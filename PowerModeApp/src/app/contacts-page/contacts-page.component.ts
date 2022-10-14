@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
 export class ContactsPageComponent implements OnInit, AfterViewInit {
   currentIndex = 0;
   contacts = Contacts;
+  keyBinds: any;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -23,6 +24,7 @@ export class ContactsPageComponent implements OnInit, AfterViewInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    this.keyBinds = this.keyBindService.getKeyBinds();
     this.contactService.getContactsByChips('companies', 'walmart', 1)
       .subscribe(res => {
         this.contacts = res.Contacts;
