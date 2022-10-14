@@ -1,0 +1,104 @@
+<div class="row container-fluid">
+  <div class="col-md-9">
+    <div class="row container-fluid">
+      <div class="col-md-4 contact-list">Power Mode Contacts
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Name</th>
+              <th>Company</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let contact of contacts; let i = index">
+            <tr id="{{'cr' + i}}">
+              <td><input type="checkbox" value="{{contact.Id}}" [(ngModel)]="contacts[i].checked"></td>
+              <td>{{ i+1 }}</td>
+              <td>{{ contact.Name }}</td>
+              <td>{{ contact.Company }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-8"> Contact Details
+        <div class="container">
+          <div class="main-body">
+            <div class="col-md-10">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ selectedContact.Name }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Company</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ selectedContact.Company }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ selectedContact.Email }}
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">Power Mode
+<section class="mb-4">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Email</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">Phone</a>
+    </li>
+  </ul>
+  <h5 class="h1-responsive font-weight-bold text-center my-2">Send Email</h5>
+  <div class="row">
+    <div class="col-md-9 mb-md-0 mb-5">
+      <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+        <div class="row">
+          <div class="col-md-12 email-text">
+            <div class="md-form mb-0">
+              <input type="text" id="subject" name="subject" class="form-control">
+              <label for="subject" class="">Subject</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="md-form">
+              <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+              <label for="message">Your message</label>
+            </div>
+          </div>
+        </div>
+      </form>
+        <div class="text-center text-md-left">
+            <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
+        </div>
+        <div class="status"></div>
+    </div>
+  </div>
+
+</section>
+
